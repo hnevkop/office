@@ -2,17 +2,20 @@ package com.hnevkop.office.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="SUPPLIER")
+@NamedQueries({ @NamedQuery(name = Supplier.FIND_ALL, query = "select s from Supplier s") })
 public class Supplier {
+
+	public static final String FIND_ALL = "Supplier.findAll";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 
 <jsp:include page="layout/header.jsp">
-	<jsp:param name="title" value="My Loans"  />
+	<jsp:param name="title" value="Suppliers"  />
 	<jsp:param name="page" value="suppliers"  />
 </jsp:include>
 
@@ -17,14 +17,15 @@
 			</h2>
   		<table class="table table-striped table-bordered table-hover">
 				<tr>
+					<th>Id</th>
 					<th>Name</th>
 					<th>Address</th>
 					<th>Email</th>
 					<th>Telephone</th>
 				</tr>				
-				<c:forEach items="${suppliers}" var="loan">
+				<c:forEach items="${suppliers}" var="supplier">
 					<tr>
-						<td><a href="loans/${supplier.id}"  >${supplier.is}</a></td>
+						<td><c:out value="${supplier.id}"/></td>
 						<td><c:out value="${supplier.name}"/></td>
 						<td><c:out value="${supplier.address}"/></td>
 						<td><c:out value="${supplier.email}"/></td>
