@@ -22,6 +22,7 @@
 					<th>Address</th>
 					<th>Email</th>
 					<th>Telephone</th>
+					<th></th>
 				</tr>				
 				<c:forEach items="${suppliers}" var="supplier">
 					<tr>
@@ -31,9 +32,9 @@
 						<td><c:out value="${supplier.email}"/></td>
 						<td><c:out value="${supplier.phone}"/></td>
 						<td>   
-							<form:form action="delete" method="post">
+							<form:form action="deleteSupplier" method="post">
 							<input type="hidden" name="id" value="${supplier.id}" />
-								<input type="submit" class="btn btn-primary navbar-btn" title="Delete this supplier »" name="Delete »" />
+							 <input type="image" src="resources/icons/delete.png" title="Remove supplier" alt="remove" onclick="return confirm('Really remove this supplier?');">
 							</form:form>
 						</td>
 					</tr>
