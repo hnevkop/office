@@ -1,21 +1,35 @@
 package com.hnevkop.office.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name="SUPPLIER")
 public class Supplier {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="SUPPLIER_ID")
+	private Long id;
 	
 	private String name;
 	private String address;
 	private String email;
 	private String phone;
 	
-	@Enumerated(EnumType.STRING)
-	private Supplier supplier;
-	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -40,11 +54,5 @@ public class Supplier {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Supplier getSupplier() {
-		return supplier;
-	}
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
-	}
-
+	
 }

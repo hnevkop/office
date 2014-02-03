@@ -1,7 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.hnevkop.office</groupId>
-  <artifactId>office</artifactId>
+  <artifactId>office</artifactId>  
+  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Office supplier demo app</name>  
     <properties>
@@ -16,12 +17,15 @@
 		<jstl.version>1.2</jstl.version>
 		<servlet.version>2.5</servlet.version>
 		
+		<!-- Json -->
+		<jackson.version>1.9.11</jackson.version>
 
 		<!-- Spring -->
 		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
 
 		<!-- Hibernate / JPA -->
 		<hibernate.version>4.2.1.Final</hibernate.version>
+		<hsqldb.version>2.3.0</hsqldb.version>
 
 		<!-- Logging -->
 		<logback.version>1.0.13</logback.version>
@@ -59,6 +63,13 @@
 			<version>${jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
+			<scope>compile</scope>
+		</dependency>		
 	
 		<!-- Spring and Transactions -->
 		<dependency>
@@ -66,6 +77,12 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>		
 
 		<!-- Logging with SLF4J & LogBack -->
 		<dependency>
@@ -87,7 +104,12 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+		</dependency>
 		
 		<!-- Test Artifacts -->
 		<dependency>
