@@ -129,7 +129,7 @@
 	
 	
 	<build>
-		<finalName>Office</finalName>
+		<finalName>office</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -143,4 +143,5 @@
 		</plugins>
 	</build>
 	
+	<description>						</description>
 </project>

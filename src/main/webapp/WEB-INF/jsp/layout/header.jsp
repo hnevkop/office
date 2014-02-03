@@ -36,14 +36,14 @@
             <span class="icon-bar"></span>
           </button>
           <c:url var="homeUrl" value="/"  />
-          <a class="navbar-brand" href="${homeUrl}">Microfinance</a>
+          <a class="navbar-brand" href="${homeUrl}">Office</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <c:url var="loansUrl" value="/loans" />
-            <c:url var="applyUrl" value="/apply" />
-            <li class="${param.page eq 'apply' ? 'active' : ''}"><a href="${applyUrl}">Apply for Loan</a></li>
-            <li class="${param.page eq 'loans' ? 'active' : ''}"><a href="${loansUrl}">My Loans</a></li>
+            <c:url var="suppliersUrl" value="/suppliers" />
+            <c:url var="registerUrl" value="/register" />
+            <li class="${param.page eq 'apply' ? 'active' : ''}"><a href="${registerUrl}">New supplier</a></li>
+            <li class="${param.page eq 'loans' ? 'active' : ''}"><a href="${suppliersUrl}">All Suppliers</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

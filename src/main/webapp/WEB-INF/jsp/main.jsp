@@ -5,7 +5,7 @@
    
 <jsp:include page="layout/header.jsp">
 	<jsp:param name="title" value="Office supplier"  />
-	<jsp:param name="page" value="loan"  />
+	<jsp:param name="page" value="main"  />
 </jsp:include>
 
 <div class="jumbotron">
@@ -17,7 +17,7 @@
 			</h1>
 			<p>A simple application that helps to manage your suppliers!</p>
 
-			<a class="btn btn-primary" href="apply"> Click to continue » </a> 
+			<a class="btn btn-primary" href="register"> Register a new supplier » </a> 
 		</div>
 
 	</div>
