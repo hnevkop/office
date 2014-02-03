@@ -35,9 +35,8 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	}
 
 	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-
+	public void delete(Supplier supplier) {
+		entityManager.remove(supplier);		
 	}
 
 }

@@ -23,12 +23,20 @@ public class OfficeServiceImpl implements OfficeService {
 	}
 
 	@Override
-	public void delete(Supplier supplier) {
-
+	public void delete(long supplierId) {
+		Supplier supplier = supplierRepository.findSupplierById(supplierId);
+		supplierRepository.delete(supplier);
 	}
 
 	@Override
 	public List<Supplier> findAllSuppliers() {
 		return supplierRepository.findAllAuppliers();
 	}
+
+	@Override
+	public Supplier findById(long id) {
+		return supplierRepository.findSupplierById(id);
+	}
+	
+	
 }

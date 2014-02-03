@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hnevkop.office.model.Supplier;
 import com.hnevkop.office.service.OfficeService;
@@ -40,6 +41,11 @@ public class SupplierController {
 		model.addAttribute("suppliers", officeService.findAllSuppliers());
 		return "suppliers";
 	}
-
 	
+	@RequestMapping(value ="/deleteSupplier", method = RequestMethod.POST)
+	public String deleteSupplier(@RequestParam int id) {
+		officeService.delete(id);
+		return "redirect:suppliers";
+	}
+			
 }
