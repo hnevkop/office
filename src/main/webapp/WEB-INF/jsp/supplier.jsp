@@ -18,7 +18,6 @@
 		<form:errors path="*" class="alert alert-danger" element="div" />		
 		<form:form commandName="supplier" cssClass="form-horizontal" method="POST" >
 			<table>
-
 				<tr>
 					<td>Name:</td>
 					<td><form:input path="name" required="true" /></td>
@@ -35,6 +34,11 @@
 					<td>email:</td>
 					<td><form:input path="email" required="true" /></td>
 				</tr>
+				<tr>
+					<td>Group:</td>
+					<td><form:select path="groups" multiple="true" items="${groups}" itemLabel="name" itemValue="id" /></td>
+				</tr>
+				
 			</table>			
 					<div class="form-group">
 							<div class="col-lg-2"> 
@@ -42,8 +46,6 @@
 							</div>
 						</div>
 		</form:form>
-
-
 	</div>
 </div>
 <jsp:include page="layout/footer.jsp" />

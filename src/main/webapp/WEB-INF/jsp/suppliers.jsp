@@ -26,7 +26,7 @@
 				</tr>				
 				<c:forEach items="${suppliers}" var="supplier">
 					<tr>
-						<td><c:out value="${supplier.id}"/></td>
+						<td><a href="suppliers/${supplier.id}">${supplier.id}</a></td>
 						<td><c:out value="${supplier.name}"/></td>
 						<td><c:out value="${supplier.address}"/></td>
 						<td><c:out value="${supplier.email}"/></td>

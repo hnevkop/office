@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ public class SupplierController {
 	public String getSupplier(Model model) {
 		Supplier supplier = new Supplier();
 		model.addAttribute("supplier", supplier);
+		model.addAttribute("groups", officeService.getAllGroups());
 		return "supplier";
 	}
 	
@@ -42,10 +44,20 @@ public class SupplierController {
 		return "suppliers";
 	}
 	
+	@RequestMapping(value ="/suppliers/{id}")
+	public String getSupplier(@PathVariable Long id, Model model ) {
+		Supplier supplier = officeService.findById(id);
+		model.addAttribute("supplier", supplier);
+		return "supplier";
+	}
+	
+	
 	@RequestMapping(value ="/deleteSupplier", method = RequestMethod.POST)
 	public String deleteSupplier(@RequestParam int id) {
 		officeService.delete(id);
 		return "redirect:suppliers";
 	}
-			
+	
+	
+
 }
