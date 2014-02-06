@@ -17,7 +17,7 @@
 			</h1>
 			<p>A simple application that helps to manage your suppliers!</p>
 
-			<a class="btn btn-primary" href="register"> Register a new supplier » </a> 
+			<a class="btn btn-primary" href="supplier"> Register a new supplier » </a> 
 		</div>
 
 	</div>

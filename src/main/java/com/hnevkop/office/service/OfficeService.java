@@ -11,6 +11,7 @@ public interface OfficeService {
 	Supplier save(Supplier supplier);
 	void delete(long supplierId);
 	List<Supplier> findAllSuppliers();
-	Supplier findById(long id);
+	Supplier findSupplierById(long id);
+	Group findGroupById(long id);
 	Set<Group> getAllGroups();
 }

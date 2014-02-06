@@ -10,4 +10,10 @@ import com.hnevkop.office.model.Group;
 public interface GroupRepository {
 
 	List<Group> findAllGroups();
+
+	Group findGroupById(long id);
+	
+	Group save(Group group);
+	
+	
 }

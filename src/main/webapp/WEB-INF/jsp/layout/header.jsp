@@ -41,7 +41,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <c:url var="suppliersUrl" value="/suppliers" />
-            <c:url var="registerUrl" value="/register" />
+            <c:url var="registerUrl" value="/supplier" />
             <li class="${param.page eq 'apply' ? 'active' : ''}"><a href="${registerUrl}">New supplier</a></li>
             <li class="${param.page eq 'loans' ? 'active' : ''}"><a href="${suppliersUrl}">All Suppliers</a></li>
           </ul>

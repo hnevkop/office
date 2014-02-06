@@ -14,12 +14,13 @@ import javax.persistence.Table;
 @Table(name="GROUPS") // Groups is a reserved keyword in HSQLDB
 @NamedQueries({ @NamedQuery(name = Group.FIND_ALL, query = "select g from Group g") })
 public class Group {
+	
+	private static final long serialVersionUID = 1L;
 
 	public static final String FIND_ALL = "Group.findAll";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="GROUP_ID")
 	private long id;
 	
 	@Column(name="NAME")
@@ -27,7 +28,6 @@ public class Group {
 	
 	@Column(name="DESCRIPTION")
 	private String description;
-	
 	
 	public long getId() {
 		return id;
@@ -84,5 +84,11 @@ public class Group {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+	
 	
 }

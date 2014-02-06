@@ -6,14 +6,14 @@
 
 
 <jsp:include page="layout/header.jsp">
-	<jsp:param name="title" value="Register a supplier" />
+	<jsp:param name="title" value="${message}" />
 	<jsp:param name="page" value="register" />
 </jsp:include>
 
 
 <div class="jumbotron">
 	<div class="container">
-	<p>Register the supplier here!</p>
+	<p>${message}</p>
 
 		<form:errors path="*" class="alert alert-danger" element="div" />		
 		<form:form commandName="supplier" cssClass="form-horizontal" method="POST" >
@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 					<td>Group:</td>
-					<td><form:select path="groups" multiple="true" items="${groups}" itemLabel="name" itemValue="id" /></td>
+					<td><form:select path="groups" required="true" multiple="true" items="${groups}" itemLabel="name" itemValue="id" /></td>
 				</tr>
 				
 			</table>			
@@ -44,7 +44,7 @@
 							<div class="col-lg-2"> 
 								<input type="submit" class="btn btn-primary navbar-btn" title="Submit" name="Submit" />
 							</div>
-						</div>
+					</div>
 		</form:form>
 	</div>
 </div>

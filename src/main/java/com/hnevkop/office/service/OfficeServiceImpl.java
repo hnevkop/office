@@ -1,6 +1,7 @@
 package com.hnevkop.office.service;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +28,13 @@ public class OfficeServiceImpl implements OfficeService {
 		
 	@Override
 	public Supplier save(Supplier supplier) {
+		// Save Group
+		Set<Group> suppliers = supplier.getGroups();
+		Iterator<Group> it = suppliers.iterator();
+		while (it.hasNext()) {
+			Group group = (Group) it.next();
+			groupRepository.save(group);
+		}
 		return supplierRepository.save(supplier);
 	}
 
@@ -42,9 +50,15 @@ public class OfficeServiceImpl implements OfficeService {
 	}
 
 	@Override
-	public Supplier findById(long id) {
+	public Supplier findSupplierById(long id) {
 		return supplierRepository.findSupplierById(id);
 	}
+	
+	@Override
+	public Group findGroupById(long id) {
+		return groupRepository.findGroupById(id);
+	}
+
 
 	@Override
 	public Set<Group> getAllGroups() {

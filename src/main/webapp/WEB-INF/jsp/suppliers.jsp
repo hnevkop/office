@@ -22,6 +22,7 @@
 					<th>Address</th>
 					<th>Email</th>
 					<th>Telephone</th>
+					<th>Type</th>
 					<th></th>
 				</tr>				
 				<c:forEach items="${suppliers}" var="supplier">
@@ -31,6 +32,7 @@
 						<td><c:out value="${supplier.address}"/></td>
 						<td><c:out value="${supplier.email}"/></td>
 						<td><c:out value="${supplier.phone}"/></td>
+						<td><c:out value="${supplier.groups}"/></td>
 						<td>   
 							<form:form action="deleteSupplier" method="post">
 							<input type="hidden" name="id" value="${supplier.id}" />

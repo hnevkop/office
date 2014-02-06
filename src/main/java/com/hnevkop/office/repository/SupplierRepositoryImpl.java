@@ -18,9 +18,15 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	
 	@Override
 	public Supplier save(Supplier supplier) {
-		entityManager.persist(supplier);
-		entityManager.flush();
-		return supplier;
+		
+		if (supplier.getId() != null ) {
+			entityManager.persist(supplier);
+			entityManager.flush();
+			return entityManager.find(Supplier.class,
+					supplier.getId());
+		} else {
+			return entityManager.merge(supplier);
+		}
 	}
 
 	@Override

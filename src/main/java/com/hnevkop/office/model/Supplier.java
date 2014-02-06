@@ -4,13 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,12 +22,13 @@ import javax.persistence.Table;
 @Table(name="SUPPLIER")
 @NamedQueries({ @NamedQuery(name = Supplier.FIND_ALL, query = "select s from Supplier s") })
 public class Supplier {
+	
+	private static final long serialVersionUID = 1L;
 
 	public static final String FIND_ALL = "Supplier.findAll";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="SUPPLIER_ID")
 	private Long id;
 	
 	private String name;
@@ -68,19 +70,31 @@ public class Supplier {
 		this.phone = phone;
 	}
 	
-	 @OneToMany(cascade = CascadeType.ALL)
+	 @ManyToMany(cascade = CascadeType.PERSIST, fetch= FetchType.EAGER)
 	 @JoinTable(
 	            name="SUPPLIER_GROUPS",
-	            joinColumns = @JoinColumn( name="SUPPLIER_ID"),
-	            inverseJoinColumns = @JoinColumn( name="GROUP_ID")
+	            joinColumns = @JoinColumn( name="SUPPLIER_ID",referencedColumnName="id"),
+	            inverseJoinColumns = @JoinColumn( name="GROUP_ID", referencedColumnName="id")
 	    )
-	 private Set<Group> groups = new HashSet<Group>(0);
+	private Set<Group> groups = new HashSet<Group>(0);
 	 
 	public Set<Group> getGroups() {
-		return this.groups;
+		return groups;
 	}
+
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
+	}
+	
+	public void addGroup(Group group) {
+		if (group != null) {
+			getGroups().add(group);
+		}
+
+	}
+
+	public void removeGroup(Group g) {
+		getGroups().remove(g);
 	}
 
 	@Override
