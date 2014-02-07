@@ -14,15 +14,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-//@NamedQuery(name = Supplier.FIND_BY_GROUP, query = "SELECT s FROM Supplier s, Group g JOIN s.groups sGroup WHERE sGroup.id = g.id AND g.id = :groupId") }
-
+/**
+ * Entity implementation class for Entity: Supplier
+ * @author Premysl Hnevkovsky
+ *
+ */
 @Entity
 @Table(name="SUPPLIER")
-@NamedQueries({ @NamedQuery(name = Supplier.FIND_ALL, query = "select s from Supplier s") ,
+@NamedQueries({ @NamedQuery(name = Supplier.FIND_ALL, query = "select s from Supplier s ") ,
 	            @NamedQuery(name = Supplier.FIND_BY_GROUP, query = "select s FROM Supplier s join s.groups g where g.id = :groupId") })
 public class Supplier {
 	
@@ -74,7 +75,8 @@ public class Supplier {
 		this.phone = phone;
 	}
 	
-	 @ManyToMany(cascade = CascadeType.PERSIST, fetch= FetchType.EAGER)
+	 @ManyToMany(cascade = CascadeType.PERSIST, fetch= FetchType.EAGER) 
+	 //Change to LAZY with Transactions or initialize collections etc. Otherwise will jackson complain when serialize ....
 	 @JoinTable(
 	            name="SUPPLIER_GROUPS",
 	            joinColumns = @JoinColumn( name="SUPPLIER_ID",referencedColumnName="id"),
@@ -86,15 +88,9 @@ public class Supplier {
 		return groups;
 	}
 
-	/*
-	public void setGroups(Set<Group> groups) {
-		this.groups = groups;
-	}
-	*/
-	
-	
 	public void setGroups(Set<Group> groups) {
 		if(groups == null) {
+			// if there is no group. However group is mandatory.
 			this.groups = new HashSet<Group>(0);
 		} else {
 			this.groups = groups;

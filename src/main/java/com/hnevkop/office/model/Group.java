@@ -10,8 +10,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
+/**
+ * Entity implementation class for Entity: Group
+ * @author Premysl Hnevkovsky
+ *
+ */
 @Entity
-@Table(name="GROUPS") // Groups is a reserved keyword in HSQLDB
+@Table(name="GROUPS") // NOTE: Group is a reserved keyword in HSQLDB
 @NamedQueries({ @NamedQuery(name = Group.FIND_ALL, query = "select g from Group g") })
 public class Group {
 	
@@ -89,6 +94,5 @@ public class Group {
 	public String toString() {
 		return name;
 	}
-	
 	
 }

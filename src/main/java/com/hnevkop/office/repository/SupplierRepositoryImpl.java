@@ -19,16 +19,15 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	
 	@Override
 	public Supplier save(Supplier supplier) {
-		
+
+// NOTE!: Implement bi-directional mapping in case you want to use this code		
 //		if (supplier.getId() == 0 ) {
 //			entityManager.persist(supplier);
 //			entityManager.flush();
 //			return entityManager.find(Supplier.class,
 //					supplier.getId());
-//		} else {
-//			return entityManager.merge(supplier);
-//		}
-		
+//			}
+
 		return entityManager.merge(supplier);
 	}
 	

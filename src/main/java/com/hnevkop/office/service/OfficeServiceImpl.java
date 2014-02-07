@@ -1,7 +1,6 @@
 package com.hnevkop.office.service;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -34,14 +33,7 @@ public class OfficeServiceImpl implements OfficeService {
 	public Supplier save(Supplier supplier) {
 		
 		LOG.debug("Saving Suppiler:"+supplier.toString());
-//		// Save Group
-//		Set<Group> suppliers = supplier.getGroups();
-//		Iterator<Group> it = suppliers.iterator();
-//		while (it.hasNext()) {
-//			Group group = (Group) it.next();
-//			groupRepository.save(group);
-//		}
-		Hibernate.initialize(supplier.getGroups());  
+		//Hibernate.initialize(supplier.getGroups());  
 		return supplierRepository.save(supplier);
 	}
 	
