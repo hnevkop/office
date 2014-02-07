@@ -3,6 +3,8 @@ package com.hnevkop.office.controller;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ import com.hnevkop.office.service.OfficeService;
 @Controller
 public class SupplierController {
 	
+	static final Logger LOG = LoggerFactory.getLogger(SupplierController.class);
 	
 	@Autowired
 	private OfficeService officeService;
@@ -55,7 +57,6 @@ public class SupplierController {
 	
 	@RequestMapping(value ="/suppliers", method = RequestMethod.GET)
 	public String getSuppliers(ModelMap map) {
-		map.addAttribute("suppliers", officeService.findAllSuppliers());
 		map.addAttribute("allGroups", officeService.getAllGroups());
 		map.addAttribute("searchFilter", new SearchFilter());
 		return "suppliers";
@@ -71,11 +72,6 @@ public class SupplierController {
 			List<Supplier> suppliers = officeService.findAllSuppliersForGroup(group);
 			return suppliers;
 		}		
-	}
-	
-	@RequestMapping(value ="/search", method = RequestMethod.GET)
-	public @ResponseBody List<Supplier> searchSuppliers() {		
-			return officeService.findAllSuppliers();
 	}
 	
 	@RequestMapping(value ="/suppliers/{id}", method = RequestMethod.POST)
@@ -112,29 +108,23 @@ public class SupplierController {
 		binder.registerCustomEditor(Set.class, "groups", new CustomCollectionEditor(Set.class) {
 			protected Object convertElement(Object element) {
 				if (element instanceof Group) {
-					System.out.println("Converting from Group to Group: " + element);
+					LOG.debug("Converting from Group to Group: " + element);
 					return element;
 				}
 				if (element instanceof String) {
 					long id = Long.parseLong((String)element);
 					Group group = officeService.findGroupById(id);
-					System.out.println("Looking up group for String id " + element + ": " + group);
+					LOG.debug("Looking up group for String id " + element + ": " + group);
 					return group;
 				}
 				
 				if (element instanceof Long) {
 					Group group = officeService.findGroupById((Long)element);
-					System.out.println("Looking up group for Long id " + element + ": " + group);
+					LOG.debug("Looking up group for Long id " + element + ": " + group);
 					return group;
-				}
+				}				
 				
-				if (element instanceof Integer) {
-					Group group = officeService.findGroupById((Integer)element);
-					System.out.println("Looking up group for Integer id " + element + ": " + group);
-					return group;
-				}
-				
-				System.out.println("Don't know what to do with: " + element.toString());
+				LOG.error("Don't know what to do with: " + element.toString());
 				return null;
 			}
 		});
