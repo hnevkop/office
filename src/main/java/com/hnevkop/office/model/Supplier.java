@@ -20,12 +20,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="SUPPLIER")
-@NamedQueries({ @NamedQuery(name = Supplier.FIND_ALL, query = "select s from Supplier s") })
+@NamedQueries({ @NamedQuery(name = Supplier.FIND_ALL, query = "select s from Supplier s") ,
+	            @NamedQuery(name = Supplier.FIND_BY_GROUP, query = "select s from Supplier s ") })
 public class Supplier {
 	
 	private static final long serialVersionUID = 1L;
 
 	public static final String FIND_ALL = "Supplier.findAll";
+	public static final String FIND_BY_GROUP = "Supplier.findSupplierByGroup";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

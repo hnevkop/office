@@ -1,11 +1,11 @@
 package com.hnevkop.office.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hnevkop.office.model.Group;
 import com.hnevkop.office.model.Supplier;
@@ -52,11 +53,17 @@ public class SupplierController {
 	}
 	
 	@RequestMapping(value ="/suppliers", method = RequestMethod.GET)
-	public String getSuppliers(Model model) {
-		model.addAttribute("suppliers", officeService.findAllSuppliers());
+	public String getSuppliers(ModelMap map) {
+		map.addAttribute("suppliers", officeService.findAllSuppliers());
+		map.addAttribute("allGroups", officeService.getAllGroups());
+		map.addAttribute("group", "1");
 		return "suppliers";
 	}
 	
+	@RequestMapping(value ="/ajaxsuppliers", method = RequestMethod.GET)
+	public @ResponseBody List<Supplier> loadSuppliers() {
+		return officeService.findAllSuppliers();
+	}
 	
 	@RequestMapping(value ="/suppliers/{id}", method = RequestMethod.POST)
 	public String updateSupplier(@ModelAttribute("supplier") Supplier supplier, BindingResult result) {
