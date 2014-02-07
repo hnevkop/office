@@ -52,7 +52,8 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	@Override
 	public List<Supplier> findAllAuppliersForGroup(long groupId) {
 		
-		Query query= entityManager.createNamedQuery(Supplier.FIND_BY_GROUP, Supplier.class);
+		Query query= entityManager.
+					createNamedQuery(Supplier.FIND_BY_GROUP, Supplier.class);
 		query.setParameter("groupId", groupId);
 		return query.getResultList();	
 		}

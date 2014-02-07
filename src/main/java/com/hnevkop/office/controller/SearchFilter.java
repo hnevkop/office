@@ -1,5 +1,10 @@
 package com.hnevkop.office.controller;
 
+/**
+ * Dummy implementation of a search filter. 
+ * @author Premysl Hnevkovsky
+ *
+ */
 public class SearchFilter {
 	
 	private String searchId;
@@ -10,7 +15,6 @@ public class SearchFilter {
 
 	public void setSearchId(String searchId) {
 		this.searchId = searchId;
-	}
-	
+	}	
 
 }

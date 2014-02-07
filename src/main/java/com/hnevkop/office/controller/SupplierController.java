@@ -26,6 +26,10 @@ import com.hnevkop.office.service.OfficeService;
 @Controller
 public class SupplierController {
 	
+	private static final String EDIT_SUPPLIER = "Edit Supplier";
+
+	private static final String NEW_SUPPLIER = "New Supplier";
+
 	static final Logger LOG = LoggerFactory.getLogger(SupplierController.class);
 	
 	@Autowired
@@ -41,12 +45,12 @@ public class SupplierController {
 		Supplier supplier = new Supplier();
 		map.addAttribute("supplier", supplier);
 		map.addAttribute("allGroups", officeService.getAllGroups());
-		map.addAttribute("message", "New Supplier");
+		map.addAttribute("message", NEW_SUPPLIER);
 		return "supplier";
 	}
 	
 	@RequestMapping(value ="/supplier", method = RequestMethod.POST)
-	public String saveNewSupplier(@ModelAttribute("supplier") Supplier supplier, BindingResult result) {		
+	public String saveSupplier(@ModelAttribute("supplier") Supplier supplier, BindingResult result) {		
 		if (result.hasErrors()) {
 	         return "supplier";
 	      } else {
@@ -65,11 +69,12 @@ public class SupplierController {
 	@RequestMapping(value ="/search", method = RequestMethod.POST)
 	public @ResponseBody List<Supplier> searchSuppliers(@RequestParam(value="searchId", required=true) String filterId){
 		
+		// 0 is reserved  for no filter
 		if(filterId.equals("0")){
-			return officeService.findAllSuppliers();
+			return officeService.getAllSuppliers();
 		} else {
-			Group group = officeService.findGroupById(Long.parseLong(filterId));
-			List<Supplier> suppliers = officeService.findAllSuppliersForGroup(group);
+			Group group = officeService.getGroupById(Long.parseLong(filterId));
+			List<Supplier> suppliers = officeService.getAllSuppliersForGroup(group);
 			return suppliers;
 		}		
 	}
@@ -88,11 +93,11 @@ public class SupplierController {
 	
 	@RequestMapping(value ="/suppliers/{id}", method = RequestMethod.GET)
 	public String editSupplier(@PathVariable Long id, ModelMap map ) {
-		Supplier supplier = officeService.findSupplierById(id);
+		Supplier supplier = officeService.getSupplierById(id);
 		map.addAttribute("supplier", supplier);
 		map.addAttribute("groups", supplier.getGroups());
 		map.addAttribute("allGroups", officeService.getAllGroups());
-		map.addAttribute("message", "Edit Supplier");
+		map.addAttribute("message", EDIT_SUPPLIER);
 		return "supplier";
 	}
 	
@@ -113,13 +118,13 @@ public class SupplierController {
 				}
 				if (element instanceof String) {
 					long id = Long.parseLong((String)element);
-					Group group = officeService.findGroupById(id);
+					Group group = officeService.getGroupById(id);
 					LOG.debug("Looking up group for String id " + element + ": " + group);
 					return group;
 				}
 				
 				if (element instanceof Long) {
-					Group group = officeService.findGroupById((Long)element);
+					Group group = officeService.getGroupById((Long)element);
 					LOG.debug("Looking up group for Long id " + element + ": " + group);
 					return group;
 				}				

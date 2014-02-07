@@ -33,7 +33,7 @@ public class OfficeServiceImpl implements OfficeService {
 	public Supplier save(Supplier supplier) {
 		
 		LOG.debug("Saving Suppiler:"+supplier.toString());
-		//Hibernate.initialize(supplier.getGroups());  
+		//Hibernate.initialize(supplier.getGroups()); no need when merge  
 		return supplierRepository.save(supplier);
 	}
 	
@@ -49,22 +49,22 @@ public class OfficeServiceImpl implements OfficeService {
 	}
 
 	@Override
-	public List<Supplier> findAllSuppliers() {
+	public List<Supplier> getAllSuppliers() {
 		return supplierRepository.findAllAuppliers();
 	}
 	
 	@Override
-	public List<Supplier> findAllSuppliersForGroup(Group group) {
+	public List<Supplier> getAllSuppliersForGroup(Group group) {
 		return supplierRepository.findAllAuppliersForGroup(group.getId());
 	}
 
 	@Override
-	public Supplier findSupplierById(long id) {
+	public Supplier getSupplierById(long id) {
 		return supplierRepository.findSupplierById(id);
 	}
 	
 	@Override
-	public Group findGroupById(long id) {
+	public Group getGroupById(long id) {
 		return groupRepository.findGroupById(id);
 	}
 
