@@ -4,10 +4,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import com.hnevkop.office.model.Group;
 import com.hnevkop.office.model.Supplier;
@@ -17,8 +19,9 @@ import com.hnevkop.office.repository.SupplierRepository;
 @Service("officeService")
 @Transactional
 public class OfficeServiceImpl implements OfficeService {
-
 	
+	static final Logger LOG = LoggerFactory.getLogger(OfficeServiceImpl.class);
+
 	@Autowired
 	private SupplierRepository supplierRepository;
 	
@@ -28,6 +31,8 @@ public class OfficeServiceImpl implements OfficeService {
 		
 	@Override
 	public Supplier save(Supplier supplier) {
+		
+		LOG.debug("Saving Suppiler:"+supplier.toString());
 		// Save Group
 		Set<Group> suppliers = supplier.getGroups();
 		Iterator<Group> it = suppliers.iterator();
@@ -36,6 +41,11 @@ public class OfficeServiceImpl implements OfficeService {
 			groupRepository.save(group);
 		}
 		return supplierRepository.save(supplier);
+	}
+	
+	@Override
+	public Supplier update(Supplier supplier) {
+		return supplierRepository.updateSupplier(supplier);
 	}
 
 	@Override

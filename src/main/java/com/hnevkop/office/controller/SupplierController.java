@@ -36,31 +36,46 @@ public class SupplierController {
 	public String getSupplier(ModelMap map) {
 		Supplier supplier = new Supplier();
 		map.addAttribute("supplier", supplier);
-		map.addAttribute("groups", officeService.getAllGroups());
+		map.addAttribute("allGroups", officeService.getAllGroups());
 		map.addAttribute("message", "New Supplier");
 		return "supplier";
 	}
 	
 	@RequestMapping(value ="/supplier", method = RequestMethod.POST)
-	public String getSupplier(@ModelAttribute("supplier") Supplier supplier, BindingResult result) {		
+	public String saveNewSupplier(@ModelAttribute("supplier") Supplier supplier, BindingResult result) {		
 		if (result.hasErrors()) {
 	         return "supplier";
 	      } else {
 	    	  officeService.save(supplier);
-	         return "redirect:suppliers";
+	         return "redirect:/suppliers";
 	      }
 	}
 	
-	@RequestMapping(value ="/suppliers")
-	public String showSuppliers(Model model) {
+	@RequestMapping(value ="/suppliers", method = RequestMethod.GET)
+	public String getSuppliers(Model model) {
 		model.addAttribute("suppliers", officeService.findAllSuppliers());
 		return "suppliers";
 	}
 	
-	@RequestMapping(value ="/suppliers/{id}")
-	public String getSupplier(@PathVariable Long id, ModelMap map ) {
+	
+	@RequestMapping(value ="/suppliers/{id}", method = RequestMethod.POST)
+	public String updateSupplier(@ModelAttribute("supplier") Supplier supplier, BindingResult result) {
+		
+		if (result.hasErrors()) {
+	         return "supplier";
+	      } else {
+	    	  officeService.update(supplier);
+	    	  return "redirect:/suppliers";
+	      }
+	}
+	
+	
+	@RequestMapping(value ="/suppliers/{id}", method = RequestMethod.GET)
+	public String editSupplier(@PathVariable Long id, ModelMap map ) {
 		Supplier supplier = officeService.findSupplierById(id);
 		map.addAttribute("supplier", supplier);
+		map.addAttribute("groups", supplier.getGroups());
+		map.addAttribute("allGroups", officeService.getAllGroups());
 		map.addAttribute("message", "Edit Supplier");
 		return "supplier";
 	}
@@ -69,7 +84,7 @@ public class SupplierController {
 	@RequestMapping(value ="/deleteSupplier", method = RequestMethod.POST)
 	public String deleteSupplier(@RequestParam int id) {
 		officeService.delete(id);
-		return "redirect:suppliers";
+		return "redirect:/suppliers";
 	}
 	
 	@InitBinder

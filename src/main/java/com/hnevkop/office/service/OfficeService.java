@@ -9,6 +9,7 @@ import com.hnevkop.office.model.Supplier;
 public interface OfficeService {
 	
 	Supplier save(Supplier supplier);
+	Supplier update(Supplier supplier);
 	void delete(long supplierId);
 	List<Supplier> findAllSuppliers();
 	Supplier findSupplierById(long id);

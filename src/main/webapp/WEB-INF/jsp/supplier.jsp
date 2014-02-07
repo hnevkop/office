@@ -16,7 +16,7 @@
 	<p>${message}</p>
 
 		<form:errors path="*" class="alert alert-danger" element="div" />		
-		<form:form commandName="supplier" cssClass="form-horizontal" method="POST" >
+		<form:form commandName="supplier" cssClass="form-horizontal"  method="POST" >
 			<table>
 				<tr>
 					<td>Name:</td>
@@ -36,9 +36,9 @@
 				</tr>
 				<tr>
 					<td>Group:</td>
-					<td><form:select path="groups" required="true" multiple="true" items="${groups}" itemLabel="name" itemValue="id" /></td>
+					<td><form:select path="groups" required="true" multiple="true" items="${allGroups}" itemLabel="name" itemValue="id"  /></td>
 				</tr>
-				
+
 			</table>			
 					<div class="form-group">
 							<div class="col-lg-2"> 

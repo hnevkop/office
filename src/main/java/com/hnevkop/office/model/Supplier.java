@@ -82,9 +82,21 @@ public class Supplier {
 		return groups;
 	}
 
+	/*
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
+	*/
+	
+	
+	public void setGroups(Set<Group> groups) {
+		if(groups == null) {
+			this.groups = new HashSet<Group>(0);
+		} else {
+			this.groups = groups;
+		}
+	}
+	
 	
 	public void addGroup(Group group) {
 		if (group != null) {

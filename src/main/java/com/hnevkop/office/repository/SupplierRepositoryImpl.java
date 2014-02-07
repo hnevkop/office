@@ -28,6 +28,17 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 			return entityManager.merge(supplier);
 		}
 	}
+	
+	@Override
+	public Supplier updateSupplier(Supplier supplier) {
+		Supplier supplierToUpdate = this.findSupplierById(supplier.getId());
+		supplierToUpdate.setName(supplier.getName());
+		supplierToUpdate.setAddress(supplier.getAddress());
+		supplierToUpdate.setEmail(supplier.getEmail());
+		supplierToUpdate.setPhone(supplier.getPhone());
+		supplierToUpdate.setGroups(supplier.getGroups());
+		return entityManager.merge(supplierToUpdate);
+	}
 
 	@Override
 	public List<Supplier> findAllAuppliers() {

@@ -8,6 +8,8 @@ public interface SupplierRepository {
 	
 	Supplier save(Supplier supplier);
 	
+	Supplier updateSupplier(Supplier supplier);
+	
 	List<Supplier> findAllAuppliers();
 	
 	Supplier findSupplierById(long id);
