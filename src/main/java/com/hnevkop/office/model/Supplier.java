@@ -18,10 +18,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+//@NamedQuery(name = Supplier.FIND_BY_GROUP, query = "SELECT s FROM Supplier s, Group g JOIN s.groups sGroup WHERE sGroup.id = g.id AND g.id = :groupId") }
+
 @Entity
 @Table(name="SUPPLIER")
 @NamedQueries({ @NamedQuery(name = Supplier.FIND_ALL, query = "select s from Supplier s") ,
-	            @NamedQuery(name = Supplier.FIND_BY_GROUP, query = "select s from Supplier s ") })
+	            @NamedQuery(name = Supplier.FIND_BY_GROUP, query = "select s FROM Supplier s join s.groups g where g.id = :groupId") })
 public class Supplier {
 	
 	private static final long serialVersionUID = 1L;
@@ -31,7 +33,7 @@ public class Supplier {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	private String name;
 	private String address;
@@ -41,10 +43,10 @@ public class Supplier {
 	public Supplier() {
 	}
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {

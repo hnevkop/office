@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.hnevkop.office.model.Group;
-import com.hnevkop.office.model.Supplier;
 
 @Repository("groupRepository")
 public class GroupRepositoryImpl implements GroupRepository {

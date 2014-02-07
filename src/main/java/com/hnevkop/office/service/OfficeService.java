@@ -15,4 +15,5 @@ public interface OfficeService {
 	Supplier findSupplierById(long id);
 	Group findGroupById(long id);
 	Set<Group> getAllGroups();
+	List<Supplier> findAllSuppliersForGroup(Group group);
 }

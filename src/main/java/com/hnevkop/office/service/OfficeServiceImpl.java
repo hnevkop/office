@@ -4,12 +4,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import com.hnevkop.office.model.Group;
 import com.hnevkop.office.model.Supplier;
@@ -33,13 +34,14 @@ public class OfficeServiceImpl implements OfficeService {
 	public Supplier save(Supplier supplier) {
 		
 		LOG.debug("Saving Suppiler:"+supplier.toString());
-		// Save Group
-		Set<Group> suppliers = supplier.getGroups();
-		Iterator<Group> it = suppliers.iterator();
-		while (it.hasNext()) {
-			Group group = (Group) it.next();
-			groupRepository.save(group);
-		}
+//		// Save Group
+//		Set<Group> suppliers = supplier.getGroups();
+//		Iterator<Group> it = suppliers.iterator();
+//		while (it.hasNext()) {
+//			Group group = (Group) it.next();
+//			groupRepository.save(group);
+//		}
+		Hibernate.initialize(supplier.getGroups());  
 		return supplierRepository.save(supplier);
 	}
 	
@@ -57,6 +59,11 @@ public class OfficeServiceImpl implements OfficeService {
 	@Override
 	public List<Supplier> findAllSuppliers() {
 		return supplierRepository.findAllAuppliers();
+	}
+	
+	@Override
+	public List<Supplier> findAllSuppliersForGroup(Group group) {
+		return supplierRepository.findAllAuppliersForGroup(group.getId());
 	}
 
 	@Override

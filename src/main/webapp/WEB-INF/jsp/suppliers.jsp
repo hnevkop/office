@@ -10,69 +10,66 @@
 	<jsp:param name="page" value="suppliers"  />
 </jsp:include>
 
-<script type="text/javascript" src="jquery-1.8.3.js"></script>
-
-
-<!--   data is a JSON object with -->
-<!--   { -->
-<!--         "suppliers": [{ -->
-<!--             "id": 1, -->
-<!--                 "name": "Premysl", -->
-<!--                 "address": "Videnska 403", -->
-<!--                 "email": "premysl.hnevkovsky@gmail.com", -->
-<!--                 "phone": "41721820135", -->
-<!--                 "groups": [{ -->
-<!--                 "id": 4, -->
-<!--                     "name": "Security", -->
-<!--                     "description": "Security services" -->
-<!--             }] -->
-<!--         }] -->
-<!--     }; -->
-
 <script type="text/javascript">
 	$(document).ready(
 		function() {
-			$.getJSON('<spring:url value="suppliers.json"/>', {
+			$.getJSON('<spring:url value="search.json"/>', {
 				ajax : 'true'
-			},function feed_table(tableobj) {
-				    $('#suppliers_table').html('');
-				    // header hardcoded ... :(
-				    $('#suppliers_table').append('<tr><th>Id</th><th>Name</th><th>Address</th><th>Email</th><th>Phone</th><th>Type of services</th><th></th></tr>');
-				    $.each([tableobj.suppliers], function (_index, _obj) {
-				        $.each(_obj, function (index, row) {
-				            var line = "";
-				            var supplierId = "";
-				            
-				            $.each(row, function (key, value) {				            
-				            	if (key=="id"){
-				            		supplierId = value;
-				            	}
-				                if(jQuery.isArray(value)){
-				                    // print the groups
-				                    var groups = "";
-				                    $.each(value, function () {
-				                        var group = this.name;
-				                        groups += '&nbsp;'+group
-				                    });
-				                    line += '<td>' + groups + '</td>';
-				                }else if (key=="id"){
-				                    line += '<td><a href="suppliers/'+value+'" title="Edit supplier" >'+value+'</a></td>';
-				                }else {
-				                    line += '<td>' + value + '</td>';
-				                }                 
-				            });
-				            // delete button
-				            line += '<td><form:form action="deleteSupplier" method="post">';
-					    	line += '<input type="hidden" name="id" value="'+supplierId +'" />';
-					    	line += '<input type="image" src="resources/icons/delete.png" title="Remove supplier" alt="remove" >';
-					    	line += '</form:form></td>';
-				            line  = '<tr>' + line + '</tr>';
-				            $('#suppliers_table').append(line);
-				        });
-				    });
-				});
-			
-		});	
+			},searchAjax());
+		});		
+	
+function searchAjax() {
+	var filterStr = $("#searchFilter").serialize();
+	$.ajax({
+	    dataType : "json",
+	    url : 'search',	    
+	    type: 'POST',
+	    data:filterStr,
+	    success : function(response) {   
+	    	feed_table(response);
+	    },      
+	    error : function(){
+	        alert("Search encountered a problem");
+	    }
+	});
+	
+	function feed_table(tableobj) {
+	    $('#suppliers_table').html('');
+	    // header hardcoded ... :(
+	    $('#suppliers_table').append('<tr><th>Id</th><th>Name</th><th>Address</th><th>Email</th><th>Phone</th><th>Type of services</th><th></th></tr>');
+	    $.each(tableobj, function (index, row) {
+	            var line = "";
+	            var supplierId = "";
+	            
+	            $.each(row, function (key, value) {				            
+	            	if (key=="id"){
+	            		supplierId = value;
+	            	}
+	                if(jQuery.isArray(value)){
+	                    // print the groups
+	                    var groups = "";
+	                    $.each(value, function () {
+	                        var group = this.name;
+	                        groups += '&nbsp;'+group
+	                    });
+	                    line += '<td>' + groups + '</td>';
+	                }else if (key=="id"){
+	                    line += '<td><a href="suppliers/'+value+'" title="Edit supplier" >'+value+'</a></td>';
+	                }else {
+	                    line += '<td>' + value + '</td>';
+	                }                 
+	            });
+	            // delete button
+	            line += '<td><form:form action="deleteSupplier" method="post">';
+		    	line += '<input type="hidden" name="id" value="'+supplierId +'" />';
+		    	line += '<input type="image" src="resources/icons/delete.png" title="Remove supplier" alt="remove" >';
+		    	line += '</form:form></td>';
+	            line  = '<tr>' + line + '</tr>';
+	            $('#suppliers_table').append(line);
+	        });
+	}
+	
+}
 </script>
 
 <div class="jumbotron">
@@ -80,8 +77,14 @@
 			<h2>
 				<span> Suppliers</span>
 			</h2>
-
 			
+			<form:form  modelAttribute="searchFilter" id="searchFilter" cssClass="form-horizontal" method="post" >
+			<form:select path="searchId" onchange="searchAjax()"  >
+			   <form:option  value="0" label="--- All types ---"  />
+			   <form:options  itemValue="id"   items="${allGroups}" />
+			</form:select>						
+			</form:form>
+
   		<table class="table table-striped table-bordered table-hover" id="suppliers_table">
 		</table>
 

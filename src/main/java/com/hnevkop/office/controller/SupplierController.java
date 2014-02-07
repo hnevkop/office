@@ -12,6 +12,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,13 +57,25 @@ public class SupplierController {
 	public String getSuppliers(ModelMap map) {
 		map.addAttribute("suppliers", officeService.findAllSuppliers());
 		map.addAttribute("allGroups", officeService.getAllGroups());
-		map.addAttribute("group", "1");
+		map.addAttribute("searchFilter", new SearchFilter());
 		return "suppliers";
 	}
 	
-	@RequestMapping(value ="/ajaxsuppliers", method = RequestMethod.GET)
-	public @ResponseBody List<Supplier> loadSuppliers() {
-		return officeService.findAllSuppliers();
+	@RequestMapping(value ="/search", method = RequestMethod.POST)
+	public @ResponseBody List<Supplier> searchSuppliers(@RequestParam(value="searchId", required=true) String filterId){
+		
+		if(filterId.equals("0")){
+			return officeService.findAllSuppliers();
+		} else {
+			Group group = officeService.findGroupById(Long.parseLong(filterId));
+			List<Supplier> suppliers = officeService.findAllSuppliersForGroup(group);
+			return suppliers;
+		}		
+	}
+	
+	@RequestMapping(value ="/search", method = RequestMethod.GET)
+	public @ResponseBody List<Supplier> searchSuppliers() {		
+			return officeService.findAllSuppliers();
 	}
 	
 	@RequestMapping(value ="/suppliers/{id}", method = RequestMethod.POST)

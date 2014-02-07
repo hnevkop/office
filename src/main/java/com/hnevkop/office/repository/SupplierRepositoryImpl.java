@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -19,14 +20,16 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	@Override
 	public Supplier save(Supplier supplier) {
 		
-		if (supplier.getId() != null ) {
-			entityManager.persist(supplier);
-			entityManager.flush();
-			return entityManager.find(Supplier.class,
-					supplier.getId());
-		} else {
-			return entityManager.merge(supplier);
-		}
+//		if (supplier.getId() == 0 ) {
+//			entityManager.persist(supplier);
+//			entityManager.flush();
+//			return entityManager.find(Supplier.class,
+//					supplier.getId());
+//		} else {
+//			return entityManager.merge(supplier);
+//		}
+		
+		return entityManager.merge(supplier);
 	}
 	
 	@Override
@@ -44,6 +47,15 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	public List<Supplier> findAllAuppliers() {
 		return entityManager.createNamedQuery(Supplier.FIND_ALL, Supplier.class)
 				.getResultList();	
+		}
+	
+	
+	@Override
+	public List<Supplier> findAllAuppliersForGroup(long groupId) {
+		
+		Query query= entityManager.createNamedQuery(Supplier.FIND_BY_GROUP, Supplier.class);
+		query.setParameter("groupId", groupId);
+		return query.getResultList();	
 		}
 
 	@Override
