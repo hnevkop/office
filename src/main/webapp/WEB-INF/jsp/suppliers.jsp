@@ -13,9 +13,7 @@
 <script type="text/javascript">
 	$(document).ready(
 		function() {
-			$.getJSON('<spring:url value="search.json"/>', {
-				ajax : 'true'
-			},searchAjax());
+			searchAjax();
 		});		
 	
 function searchAjax() {
