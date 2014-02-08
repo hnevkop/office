@@ -17,6 +17,11 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	/**
+	 * Saving and updating supplier entity
+	 * @param supplier to be saved
+	 * @return supplier managed entity
+	 */
 	@Override
 	public Supplier save(Supplier supplier) {
 	

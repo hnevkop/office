@@ -61,7 +61,7 @@ function searchAjax() {
 	                }                 
 	            });
 	            // delete button
-	            line += '<td><form:form action="deleteSupplier" method="post">';
+	            line += '<td><form:form action="delete" method="post">';
 		    	line += '<input type="hidden" name="id" value="'+supplierId +'" />';
 		    	line += '<input type="image" src="resources/icons/delete.png" title="Remove supplier" alt="remove" >';
 		    	line += '</form:form></td>';

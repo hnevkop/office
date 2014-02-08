@@ -39,11 +39,20 @@ public class OfficeServiceImpl implements OfficeService {
 		supplierRepository.delete(supplier);
 	}
 
+	/**
+	 * Get all suppliers in the system
+	 * @return list of suppliers
+	 */
 	@Override
 	public List<Supplier> getAllSuppliers() {
 		return supplierRepository.findAllAuppliers();
 	}
 	
+	/**
+	 * Get supplier for given group
+	 * @param group
+	 * @return list of suppliers 
+	 */
 	@Override
 	public List<Supplier> getAllSuppliersForGroup(Group group) {
 		return supplierRepository.findSuppliersForGroup(group.getId());

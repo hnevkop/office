@@ -144,7 +144,8 @@ public class OfficeServiceTest {
 	
 	@After
 	public void tearDown() {
-		//supplierRepository.deleteAll();
-		//groupRepository.deleteAll();
+		// not needed
+		// supplierRepository.deleteAll();
+		// groupRepository.deleteAll();
 	}
 }

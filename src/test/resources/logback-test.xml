@@ -21,7 +21,7 @@
 	
 	
 	<logger name="hnevkop.office">
-		<level value="INFO" />
+		<level value="DEBUG" />
 	</logger>
 	
 	<logger name="org.springframework">

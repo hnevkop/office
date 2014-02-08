@@ -17,9 +17,6 @@
 	<c:url value="/resources/js/jquery-2.0.3.js" var="jqueryUrl" />
     <script src="${jqueryUrl}"></script>
     
-  	<c:url value="/resources/js/moment-with-langs.js" var="momentJsUrl" />
-    <script src="${momentJsUrl}"></script>
-
 	<c:url value="/resources/js/bootstrap.min.js" var="bootstrapJsUrl" />
     <script src="${bootstrapJsUrl}"></script>
   </head>

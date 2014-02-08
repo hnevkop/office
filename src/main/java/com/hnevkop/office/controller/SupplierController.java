@@ -23,6 +23,11 @@ import com.hnevkop.office.model.Group;
 import com.hnevkop.office.model.Supplier;
 import com.hnevkop.office.service.OfficeService;
 
+/**
+ * Main application controller.
+ * @author Premysl Hnevkovsky
+ *
+ */
 @Controller
 public class SupplierController {
 	
@@ -102,12 +107,18 @@ public class SupplierController {
 	}
 	
 	
-	@RequestMapping(value ="/deleteSupplier", method = RequestMethod.POST)
+	@RequestMapping(value ="/delete", method = RequestMethod.POST)
 	public String deleteSupplier(@RequestParam int id) {
 		officeService.deleteSupplier(id);
 		return "redirect:/suppliers";
 	}
 	
+	/**
+	 * Binder for Group object. 
+	 * reason for implementation: form with selects
+	 * @param binder
+	 * @throws Exception
+	 */
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) throws Exception {
 		binder.registerCustomEditor(Set.class, "groups", new CustomCollectionEditor(Set.class) {
@@ -129,7 +140,7 @@ public class SupplierController {
 					return group;
 				}				
 				
-				LOG.error("Don't know what to do with: " + element.toString());
+				LOG.error("Bider for group got unknown object type " + element.toString());
 				return null;
 			}
 		});

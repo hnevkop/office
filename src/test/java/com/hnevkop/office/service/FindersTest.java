@@ -96,6 +96,20 @@ public class FindersTest {
 		group = groupRepository.findGroupById(10);
 		Assert.assertNull(group);
 	}
+	
+	@Test
+	public void deleteTest() throws Exception{
+		supplierRepository.deleteAll();
+		groupRepository.deleteAll();
+		
+		int result = supplierRepository.findAllAuppliers().size();
+		Assert.assertEquals(0,result);
+		
+		result = groupRepository.findAllGroups().size();
+		Assert.assertEquals(0,result);
+	
+	}
+	
 
 	@Before
 	public void setUp() throws Exception{
@@ -122,8 +136,9 @@ public class FindersTest {
 	
 	@After
 	public void tearDown() {
-		supplierRepository.deleteAll();
-		groupRepository.deleteAll();
+		// not needed
+		// supplierRepository.deleteAll();
+		// groupRepository.deleteAll();
 	}
 	
 

@@ -76,7 +76,7 @@ public class Supplier {
 	}
 	
 	 @ManyToMany(cascade = CascadeType.MERGE, fetch= FetchType.EAGER) 
-	 //Change to LAZY with Transactions or initialize collections etc. Otherwise will jackson complain when serialize ....
+	 //Change to LAZY with Transactions or initialize collections etc. Otherwise will jackson complain when serialize groups to suppliers table.
 	 @JoinTable(
 	            name="SUPPLIER_GROUPS",
 	            joinColumns = @JoinColumn( name="SUPPLIER_ID",referencedColumnName="id"),
