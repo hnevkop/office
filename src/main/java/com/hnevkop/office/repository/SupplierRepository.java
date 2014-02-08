@@ -14,7 +14,7 @@ public interface SupplierRepository {
 	
 	void delete(Supplier supplier);
 
-	List<Supplier> findAllAuppliersForGroup(long groupId);
+	List<Supplier> findSuppliersForGroup(long groupId);
 
 	void deleteAll();
 	

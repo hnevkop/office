@@ -1,8 +1,6 @@
 package com.hnevkop.office.repository;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,7 +8,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.hnevkop.office.model.Group;
 import com.hnevkop.office.model.Supplier;
 
 
@@ -41,7 +38,7 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	
 	
 	@Override
-	public List<Supplier> findAllAuppliersForGroup(long groupId) {
+	public List<Supplier> findSuppliersForGroup(long groupId) {
 		
 		Query query= entityManager.
 					createNamedQuery(Supplier.FIND_BY_GROUP, Supplier.class);

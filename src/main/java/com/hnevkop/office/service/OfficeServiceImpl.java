@@ -46,7 +46,7 @@ public class OfficeServiceImpl implements OfficeService {
 	
 	@Override
 	public List<Supplier> getAllSuppliersForGroup(Group group) {
-		return supplierRepository.findAllAuppliersForGroup(group.getId());
+		return supplierRepository.findSuppliersForGroup(group.getId());
 	}
 
 	@Override

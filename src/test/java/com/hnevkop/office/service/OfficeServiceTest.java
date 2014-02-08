@@ -4,14 +4,15 @@ package com.hnevkop.office.service;
 import java.util.HashSet;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import com.hnevkop.office.model.Group;
 import com.hnevkop.office.model.Supplier;
@@ -21,6 +22,7 @@ import com.hnevkop.office.repository.SupplierRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="/testContext.xml")
+@TransactionConfiguration(defaultRollback = true)
 @Transactional
 public class OfficeServiceTest {
 	
@@ -70,15 +72,15 @@ public class OfficeServiceTest {
 		Supplier sup_created = supplierRepository.save(supplier);		
 		
 		// Check  the fields
-		Assert.isTrue(sup_created.getId()!=0);
-		Assert.isTrue(sup_created.getAddress().equals(TEST_ADDRESS));
-		Assert.isTrue(sup_created.getName().equals(TEST_NAME));
-		Assert.isTrue(sup_created.getEmail().equals(TEST_EMAIL));
-		Assert.isTrue(sup_created.getPhone().equals(TEST_NUMBER));
+		Assert.assertTrue(sup_created.getId()!=0);
+		Assert.assertTrue(sup_created.getAddress().equals(TEST_ADDRESS));
+		Assert.assertTrue(sup_created.getName().equals(TEST_NAME));
+		Assert.assertTrue(sup_created.getEmail().equals(TEST_EMAIL));
+		Assert.assertTrue(sup_created.getPhone().equals(TEST_NUMBER));
 		
 		//Check the group is associated
-		Assert.isTrue(!sup_created.getGroups().isEmpty());	
-		Assert.isTrue(sup_created.getGroups().contains(group_created));		
+		Assert.assertTrue(!sup_created.getGroups().isEmpty());	
+		Assert.assertTrue(sup_created.getGroups().contains(group_created));		
 	}
 	
 	
@@ -95,11 +97,11 @@ public class OfficeServiceTest {
 		Supplier updated_supplier = supplierRepository.save(sup_created);
 		
 		// Check  the fields
-		Assert.isTrue(updated_supplier.getId()==sup_created.getId());
-		Assert.isTrue(updated_supplier.getAddress().equals(change_str));
-		Assert.isTrue(updated_supplier.getName().equals(change_str));
-		Assert.isTrue(updated_supplier.getEmail().equals(change_str));
-		Assert.isTrue(updated_supplier.getPhone().equals(change_str));		
+		Assert.assertTrue(updated_supplier.getId()==sup_created.getId());
+		Assert.assertTrue(updated_supplier.getAddress().equals(change_str));
+		Assert.assertTrue(updated_supplier.getName().equals(change_str));
+		Assert.assertTrue(updated_supplier.getEmail().equals(change_str));
+		Assert.assertTrue(updated_supplier.getPhone().equals(change_str));		
 	}
 	
 	@Test
@@ -133,16 +135,16 @@ public class OfficeServiceTest {
 		groupRepository.save(g1);
 		Supplier saved_supplier = supplierRepository.save(supplier);
 		
-		Assert.isTrue(saved_supplier.getGroups().contains(g1));
-		Assert.isTrue(saved_supplier.getGroups().contains(g2));
-		Assert.isTrue(!saved_supplier.getGroups().contains(group));
+		Assert.assertTrue(saved_supplier.getGroups().contains(g1));
+		Assert.assertTrue(saved_supplier.getGroups().contains(g2));
+		Assert.assertTrue(!saved_supplier.getGroups().contains(group));
 		
 	}
 	
 	
 	@After
 	public void tearDown() {
-		supplierRepository.deleteAll();
-		groupRepository.deleteAll();
+		//supplierRepository.deleteAll();
+		//groupRepository.deleteAll();
 	}
 }
