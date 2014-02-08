@@ -1,7 +1,13 @@
 Appliaction notes:
 
-Application build on Spring MVC, Hibernate, JavaScript ( jQuery vey little...)
-Look And Feel by Twitter bootstrap styles
+Application build on Spring MVC, Hibernate, JavaScript ( jQuery very little...)
+Look And Feel by Twitter bootstrap styles.
+
+NOTE:
+- Hibernate Error during startup does not have any functional impact. Working on it. type:
+  ERROR org.hibernate.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table SUPPLIER_GROUPS drop constraint
+
+ 
 
 An internal Monster department come up with request to build a simple web application where they can store office suppliers details. 
 
