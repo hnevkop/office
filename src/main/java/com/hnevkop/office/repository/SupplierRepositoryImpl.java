@@ -1,6 +1,8 @@
 package com.hnevkop.office.repository;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,6 +10,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.hnevkop.office.model.Group;
 import com.hnevkop.office.model.Supplier;
 
 
@@ -19,29 +22,17 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	
 	@Override
 	public Supplier save(Supplier supplier) {
-
-// NOTE!: Implement bi-directional mapping in case you want to use this code		
-//		if (supplier.getId() == 0 ) {
-//			entityManager.persist(supplier);
-//			entityManager.flush();
-//			return entityManager.find(Supplier.class,
-//					supplier.getId());
-//			}
-
-		return entityManager.merge(supplier);
+	
+		if (supplier.getId() == 0 ) {
+			entityManager.persist(supplier);
+			entityManager.flush();
+			return entityManager.find(Supplier.class,
+					supplier.getId());
+			} else {
+				return entityManager.merge(supplier);
+			}
 	}
 	
-	@Override
-	public Supplier updateSupplier(Supplier supplier) {
-		Supplier supplierToUpdate = this.findSupplierById(supplier.getId());
-		supplierToUpdate.setName(supplier.getName());
-		supplierToUpdate.setAddress(supplier.getAddress());
-		supplierToUpdate.setEmail(supplier.getEmail());
-		supplierToUpdate.setPhone(supplier.getPhone());
-		supplierToUpdate.setGroups(supplier.getGroups());
-		return entityManager.merge(supplierToUpdate);
-	}
-
 	@Override
 	public List<Supplier> findAllAuppliers() {
 		return entityManager.createNamedQuery(Supplier.FIND_ALL, Supplier.class)
@@ -67,5 +58,15 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	public void delete(Supplier supplier) {
 		entityManager.remove(supplier);		
 	}
+
+	/**
+	 * Delete all records from supplier and supplier_groups. 
+	 */
+	@Override
+	public void deleteAll() {
+		entityManager.createNativeQuery("delete from supplier_groups").executeUpdate();
+		entityManager.createNativeQuery("delete from supplier").executeUpdate();		
+	}	
+	
 
 }

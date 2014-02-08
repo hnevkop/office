@@ -1,10 +1,10 @@
 package com.hnevkop.office.service;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +27,14 @@ public class OfficeServiceImpl implements OfficeService {
 	
 	@Autowired
 	private GroupRepository groupRepository;
-
 		
 	@Override
-	public Supplier save(Supplier supplier) {
-		
-		LOG.debug("Saving Suppiler:"+supplier.toString());
-		//Hibernate.initialize(supplier.getGroups()); no need when merge  
+	public Supplier saveSupplier(Supplier supplier) {
 		return supplierRepository.save(supplier);
 	}
-	
-	@Override
-	public Supplier update(Supplier supplier) {
-		return supplierRepository.updateSupplier(supplier);
-	}
 
 	@Override
-	public void delete(long supplierId) {
+	public void deleteSupplier(long supplierId) {
 		Supplier supplier = supplierRepository.findSupplierById(supplierId);
 		supplierRepository.delete(supplier);
 	}
@@ -67,7 +58,6 @@ public class OfficeServiceImpl implements OfficeService {
 	public Group getGroupById(long id) {
 		return groupRepository.findGroupById(id);
 	}
-
 
 	@Override
 	public Set<Group> getAllGroups() {

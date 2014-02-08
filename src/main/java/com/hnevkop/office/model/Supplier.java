@@ -75,7 +75,7 @@ public class Supplier {
 		this.phone = phone;
 	}
 	
-	 @ManyToMany(cascade = CascadeType.PERSIST, fetch= FetchType.EAGER) 
+	 @ManyToMany(cascade = CascadeType.MERGE, fetch= FetchType.EAGER) 
 	 //Change to LAZY with Transactions or initialize collections etc. Otherwise will jackson complain when serialize ....
 	 @JoinTable(
 	            name="SUPPLIER_GROUPS",
@@ -90,7 +90,7 @@ public class Supplier {
 
 	public void setGroups(Set<Group> groups) {
 		if(groups == null) {
-			// if there is no group. However group is mandatory.
+			// if there is no group - testing purposes. Group is mandatory in normal cases.
 			this.groups = new HashSet<Group>(0);
 		} else {
 			this.groups = groups;

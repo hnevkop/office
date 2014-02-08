@@ -15,12 +15,12 @@ public class GroupRepositoryImpl implements GroupRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-	
+		
 	@Override
 	public Group save(Group group) {
 		if (group.getId() == 0) {
 			entityManager.persist(group);
+			entityManager.flush();
 			return entityManager.find(Group.class,
 					group.getId());
 		} else {
@@ -39,5 +39,10 @@ public class GroupRepositoryImpl implements GroupRepository {
 	public Group findGroupById(long id) {
 		return entityManager.find(Group.class, id);
 	}
+	
+	@Override
+	public void deleteAll() {
+		entityManager.createNativeQuery("delete from groups").executeUpdate();		
+	}	
 
 }

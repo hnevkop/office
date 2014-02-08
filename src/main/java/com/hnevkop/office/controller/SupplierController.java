@@ -54,7 +54,7 @@ public class SupplierController {
 		if (result.hasErrors()) {
 	         return "supplier";
 	      } else {
-	    	  officeService.save(supplier);
+	    	  officeService.saveSupplier(supplier);
 	         return "redirect:/suppliers";
 	      }
 	}
@@ -85,7 +85,7 @@ public class SupplierController {
 		if (result.hasErrors()) {
 	         return "supplier";
 	      } else {
-	    	  officeService.update(supplier);
+	    	  officeService.saveSupplier(supplier);
 	    	  return "redirect:/suppliers";
 	      }
 	}
@@ -104,7 +104,7 @@ public class SupplierController {
 	
 	@RequestMapping(value ="/deleteSupplier", method = RequestMethod.POST)
 	public String deleteSupplier(@RequestParam int id) {
-		officeService.delete(id);
+		officeService.deleteSupplier(id);
 		return "redirect:/suppliers";
 	}
 	

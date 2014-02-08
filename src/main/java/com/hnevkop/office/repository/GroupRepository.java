@@ -14,6 +14,7 @@ public interface GroupRepository {
 	Group findGroupById(long id);
 	
 	Group save(Group group);
-	
+
+	void deleteAll();	
 	
 }

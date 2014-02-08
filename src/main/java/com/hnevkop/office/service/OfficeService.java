@@ -8,9 +8,9 @@ import com.hnevkop.office.model.Supplier;
 
 public interface OfficeService {
 	
-	Supplier save(Supplier supplier);
-	Supplier update(Supplier supplier);
-	void delete(long supplierId);
+	Supplier saveSupplier(Supplier supplier);
+	void deleteSupplier(long supplierId);
+	
 	List<Supplier> getAllSuppliers();
 	Supplier getSupplierById(long id);
 	Group getGroupById(long id);

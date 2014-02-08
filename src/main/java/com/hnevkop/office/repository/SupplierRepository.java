@@ -6,9 +6,7 @@ import com.hnevkop.office.model.Supplier;
 
 public interface SupplierRepository {
 	
-	Supplier save(Supplier supplier);
-	
-	Supplier updateSupplier(Supplier supplier);
+	Supplier save(Supplier supplier);	
 	
 	List<Supplier> findAllAuppliers();
 	
@@ -17,5 +15,7 @@ public interface SupplierRepository {
 	void delete(Supplier supplier);
 
 	List<Supplier> findAllAuppliersForGroup(long groupId);
+
+	void deleteAll();
 	
 }
