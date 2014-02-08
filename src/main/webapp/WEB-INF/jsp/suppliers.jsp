@@ -44,9 +44,12 @@ function searchAjax() {
 	            		supplierId = value;
 	            	}
 	                if(jQuery.isArray(value)){
-	                    // print the groups
+	                    // is the group array
 	                    var groups = "";
-	                    $.each(value, function () {
+	                    $.each(value, function (i,val) {	                        
+	                        if(i>0){
+	                        	groups += ',';	
+	                        }
 	                        var group = this.name;
 	                        groups += '&nbsp;'+group
 	                    });
