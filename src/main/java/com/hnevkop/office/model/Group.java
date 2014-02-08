@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -29,6 +30,7 @@ public class Group {
 	private long id;
 		
 	@Column(name="NAME")
+	@NotNull
 	private String name;
 	
 	@Column(name="DESCRIPTION")

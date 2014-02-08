@@ -30,7 +30,7 @@ function searchAjax() {
 	        alert("Search encountered a problem");
 	    }
 	});
-	
+	// not a neat code.... refactoring candidate
 	function feed_table(tableobj) {
 	    $('#suppliers_table').html('');
 	    // header hardcoded ... :(

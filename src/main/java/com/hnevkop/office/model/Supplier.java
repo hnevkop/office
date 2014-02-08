@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * Entity implementation class for Entity: Supplier
@@ -36,7 +37,9 @@ public class Supplier {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotNull
 	private String name;
+	
 	private String address;
 	private String email;
 	private String phone;
@@ -74,9 +77,10 @@ public class Supplier {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	 @ManyToMany(cascade = CascadeType.MERGE, fetch= FetchType.EAGER) 
-	 //Change to LAZY with Transactions or initialize collections etc. Otherwise will jackson complain when serialize groups to suppliers table.
+		  
+	 //Change to LAZY with Transactions or initialize collections etc. 
+	 // Otherwise will jackson complain when serialize groups to suppliers table.
+	@ManyToMany(cascade = CascadeType.MERGE, fetch= FetchType.EAGER)
 	 @JoinTable(
 	            name="SUPPLIER_GROUPS",
 	            joinColumns = @JoinColumn( name="SUPPLIER_ID",referencedColumnName="id"),
