@@ -9,7 +9,7 @@
 
         <!--Daily rolling file appender -->
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>logFile.log</File>
+		<File>/logs/office.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>logFile.%d{yyyy-MM-dd}.log</FileNamePattern>
 		</rollingPolicy>
@@ -27,8 +27,11 @@
 	<logger name="org.springframework">
         <level value="INFO" />
     </logger>
- 
-	
+    
+    <logger name="org.hibernate.tool.hbm2ddl.SchemaExport">
+        <level value="FATAL" />  <!-- Not relevant errors during startup -->
+    </logger>
+
 	<root>
 		<level value="error" />
 		<appender-ref ref="STDOUT" />
