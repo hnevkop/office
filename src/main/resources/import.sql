@@ -2,3 +2,12 @@ insert into GROUPS (ID, NAME, DESCRIPTION) values ('1', 'Cleaners', 'Cleaning th
 insert into GROUPS (ID, NAME, DESCRIPTION) values ('2', 'Office Supply', 'Office supply e.g. paper, pens, etc.');
 insert into GROUPS (ID, NAME, DESCRIPTION) values ('3', 'Telephone Service', 'Telephone and internet services');
 insert into GROUPS (ID, NAME, DESCRIPTION) values ('4', 'Security', 'Security services');
+insert into SUPPLIER (ID, NAME, ADDRESS, EMAIL, PHONE) values ('1', 'Fast Office', 'Na porici 1, Praha 4, Czech Republic', 'info@fastoffice.com', '420123555');
+insert into SUPPLIER (ID, NAME, ADDRESS, EMAIL, PHONE) values ('2', 'Office Depot', 'Vysehradska 1024/5, Praha 4, Czech Republic', 'info@depot.com', '420123444');
+insert into SUPPLIER (ID, NAME, ADDRESS, EMAIL, PHONE) values ('3', 'Falck', 'Belehradska 22, Praha 2, Czech Republic', 'info@falck.cz', '420222555');
+insert into SUPPLIER (ID, NAME, ADDRESS, EMAIL, PHONE) values ('4', 'T-Mobile', 'K uvalu 5, Praha 10, Czech Republic', 'info@tmobile.cz', '420888555');
+insert into SUPPLIER_GROUPS(SUPPLIER_ID,GROUP_ID) values(1,1);
+insert into SUPPLIER_GROUPS(SUPPLIER_ID,GROUP_ID) values(2,1);
+insert into SUPPLIER_GROUPS(SUPPLIER_ID,GROUP_ID) values(2,2);
+insert into SUPPLIER_GROUPS(SUPPLIER_ID,GROUP_ID) values(3,4);
+insert into SUPPLIER_GROUPS(SUPPLIER_ID,GROUP_ID) values(4,3);

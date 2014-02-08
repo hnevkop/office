@@ -21,11 +21,11 @@
 	
 	
 	<logger name="hnevkop.office">
-		<level value="debug" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="org.springframework">
-        <level value="DEBUG" />
+        <level value="INFO" />
     </logger>
  
 	
